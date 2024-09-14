@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CleanArchitecture.Application.DTOs.Leave;
+using CleanArchitecture.Application.DTOs.LeaveAllocation;
 using CleanArchitecture.Application.DTOs.LeaveRequest;
 using CleanArchitecture.Domain.Entities.Leave;
 

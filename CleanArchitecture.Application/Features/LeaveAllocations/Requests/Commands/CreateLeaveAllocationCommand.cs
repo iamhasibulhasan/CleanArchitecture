@@ -5,6 +5,6 @@ namespace CleanArchitecture.Application.Features.LeaveAllocations.Requests.Comma
 {
     public sealed class CreateLeaveAllocationCommand : IRequest<int>
     {
-        public LeaveAllocationDto LeaveAllocationDto { get; set; }
+        public CreateLeaveAllocationDto LeaveAllocationDto { get; set; }
     }
 }

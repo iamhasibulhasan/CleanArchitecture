@@ -7,5 +7,6 @@ namespace CleanArchitecture.Application.Persistence.Contracts.Leave
     {
         Task<LeaveRequestDto> GetLeaveRequest(int id, CancellationToken cancellationToken = default);
         Task<List<LeaveRequestListDto>> GetLeaveRequestList(CancellationToken cancellationToken = default);
+        Task ChangeApprovalStatus(LeaveRequest model, bool approved = true, CancellationToken cancellationToken = default);
     }
 }

@@ -1,8 +1,9 @@
-﻿using CleanArchitecture.Application.DTOs.Leave;
+﻿using CleanArchitecture.Application.DTOs.Common;
+using CleanArchitecture.Application.DTOs.Leave;
 
 namespace CleanArchitecture.Application.DTOs.LeaveRequest
 {
-    public sealed class LeaveRequestListDto
+    public sealed class LeaveRequestListDto : BaseDto
     {
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

@@ -24,9 +24,8 @@ public sealed class User : BaseEntity
         return user;
     }
 
-    public void Update(string userCode, string firstName, string lastName, DateTime dateOfBirth, string email, string phone)
+    public void Update(string firstName, string lastName, DateTime dateOfBirth, string email, string phone)
     {
-        UserCode = userCode;
         FirstName = firstName;
         LastName = lastName;
         DateOfBirth = dateOfBirth;

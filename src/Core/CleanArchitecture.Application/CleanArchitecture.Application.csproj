@@ -10,4 +10,12 @@
     <ProjectReference Include="..\CleanArchitecture.Domain\CleanArchitecture.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Abstraction\MediatR\" />
+    <Folder Include="Common\Utilities\" />
+    <Folder Include="Features\" />
+    <Folder Include="RepositoryInterfaces\Common\" />
+    <Folder Include="ServiceInterfaces\" />
+  </ItemGroup>
+
 </Project>

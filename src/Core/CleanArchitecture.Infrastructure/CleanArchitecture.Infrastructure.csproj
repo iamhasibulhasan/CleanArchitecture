@@ -15,4 +15,8 @@
     <ProjectReference Include="..\CleanArchitecture.Application\CleanArchitecture.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ServiceImplementations\" />
+  </ItemGroup>
+
 </Project>

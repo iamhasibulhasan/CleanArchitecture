@@ -11,9 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Users\Command\Create\" />
     <Folder Include="Features\Users\Command\Delete\" />
-    <Folder Include="Features\Users\Command\Dtos\" />
     <Folder Include="Features\Users\Command\Update\" />
     <Folder Include="Features\Users\Queries\Dtos\" />
     <Folder Include="Features\Users\Queries\GetAll\" />

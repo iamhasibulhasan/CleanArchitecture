@@ -1,3 +1,5 @@
+using Audit.PostgreSql;
+using Audit.PostgreSql.Providers;
 using CleanArchitecture.Application;
 using CleanArchitecture.Infrastructure;
 
@@ -15,9 +17,24 @@ builder.Services
     .AddApplication()
     .AddInfrastructure(configuration);
 
+Audit.Core.Configuration.Setup()
+    .UseCustomProvider(new PostgreSqlDataProvider
+    {
+        ConnectionString = configuration.GetConnectionString("DbConnection"),
+        TableName = "AuditLogs",
+        IdColumnName = "Id",
+        DataColumnName = "Data",
+        DataType = "JSONB",
+        CustomColumns = new List<CustomColumn>
+        {
+            new CustomColumn("EventType", ev => ev.EventType),
+            new CustomColumn("UserName",ev => "Admin")
+        }
+    });
+
 
 var app = builder.Build();
-
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

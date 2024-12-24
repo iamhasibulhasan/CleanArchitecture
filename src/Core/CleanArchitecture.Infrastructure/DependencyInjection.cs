@@ -1,12 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CleanArchitecture.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace CleanArchitecture.Infrastructure
+namespace CleanArchitecture.Infrastructure;
+
+public static class DependencyInjection
 {
-    public sealed class DependencyInjection
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddDbContext<DefaultDbContext>(options =>
+        options.UseNpgsql(configuration.GetConnectionString("DbConnection"), b => b.MigrationsAssembly(typeof(DefaultDbContext).Assembly.FullName)));
+
+        //Dependency(services);
+        return services;
     }
+    //public static void Dependency(this IServiceCollection services)
+    //{
+    //    var assembliesToScan = new[]
+    //    {
+    //        Assembly.GetExecutingAssembly(),
+    //        Assembly.GetAssembly(typeof(StudentService)),
+    //        Assembly.GetAssembly(typeof(StudentRepository))
+    //    };
+    //    services.RegisterAssemblyPublicNonGenericClasses(assembliesToScan)
+    //        .Where(c => c.Name.EndsWith("Service") || c.Name.EndsWith("Repository"))
+    //        .AsPublicImplementedInterfaces();
+    //}
 }

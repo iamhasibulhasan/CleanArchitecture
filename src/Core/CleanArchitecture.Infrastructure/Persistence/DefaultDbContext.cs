@@ -1,5 +1,17 @@
-﻿namespace CleanArchitecture.Infrastructure.Persistence;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
-public sealed class DefaultDbContext
+namespace CleanArchitecture.Infrastructure.Persistence;
+
+public sealed class DefaultDbContext : DbContext
 {
+    public DefaultDbContext(DbContextOptions<DefaultDbContext> options) : base(options) { }
+
+
+    // This is for entity (configuration) reading 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        base.OnModelCreating(modelBuilder);
+    }
 }

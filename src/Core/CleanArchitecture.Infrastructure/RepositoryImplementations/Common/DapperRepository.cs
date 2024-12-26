@@ -39,7 +39,7 @@ public class DapperRepository : IDapperRepository
     {
         return (await _dbConnection.QueryAsync<T>(query, dynamicParameters, commandType: commandType)).FirstOrDefault();
     }
-    public async Task<List<T>> GetAllAsync<T>(string query, DynamicParameters? dynamicParameters = null, CommandType commandType = CommandType.Text)
+    public async Task<List<T>> GetAllAsync<T>(string query, DynamicParameters? dynamicParameters, CommandType commandType = CommandType.Text)
     {
         return (await _dbConnection.QueryAsync<T>(query, dynamicParameters, commandType: commandType)).ToList();
     }

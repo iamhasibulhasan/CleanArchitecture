@@ -1,18 +1,24 @@
 ﻿using CleanArchitecture.Application.Common.Utilities;
+using CleanArchitecture.Application.Constants;
 using CleanArchitecture.Application.Features.Users.Command.Dtos;
+using CleanArchitecture.Application.Features.Users.Queries.Dtos;
+using CleanArchitecture.Application.RepositoryInterfaces.Common;
 using CleanArchitecture.Application.RepositoryInterfaces.Users;
 using CleanArchitecture.Application.ServiceInterfaces.Users;
 using CleanArchitecture.Domain.Entities.Users;
+using Dapper;
 
 namespace CleanArchitecture.Infrastructure.ServiceImplementations.Users
 {
     public sealed class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IDapperRepository _dapperRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IDapperRepository dapperRepository)
         {
             _userRepository = userRepository;
+            _dapperRepository = dapperRepository;
         }
 
         #region Command
@@ -52,7 +58,12 @@ namespace CleanArchitecture.Infrastructure.ServiceImplementations.Users
         #region Queries
         public async Task<Result> GetAll(CancellationToken cancellationToken)
         {
-            var res = await _userRepository.GetAllAsync(cancellationToken);
+            //var res = await _userRepository.GetAllAsync(cancellationToken);
+
+            DynamicParameters dynamicParameters = new();
+            var query = $"SELECT * FROM {StoredProcedureNames.users_getall}()";
+            var res = await _dapperRepository.GetAllAsync<GetAllUserDto>(query, dynamicParameters);
+
             if (res.Count <= 0)
                 return Utility.GetNoDataFoundMsg();
 
@@ -61,7 +72,11 @@ namespace CleanArchitecture.Infrastructure.ServiceImplementations.Users
 
         public async Task<Result> GetById(int id, CancellationToken cancellationToken)
         {
-            var res = await _userRepository.GetByIdAsync(id, cancellationToken);
+            //var res = await _userRepository.GetByIdAsync(id, cancellationToken);
+
+            DynamicParameters dynamicParameters = new();
+            var query = $"SELECT * FROM {StoredProcedureNames.users_getbyid}({id})";
+            var res = await _dapperRepository.GetBySingleParamAsync<GetByIdUserDto>(query, dynamicParameters);
 
             if (res is null)
                 return Utility.GetNoDataFoundMsg();

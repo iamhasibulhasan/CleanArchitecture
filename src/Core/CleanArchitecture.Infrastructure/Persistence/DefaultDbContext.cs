@@ -10,6 +10,7 @@ public sealed class DefaultDbContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<Education> Educations { get; set; }
+    public DbSet<ReplicaUser> ReplicaUsers { get; set; }
 
     // This is for entity (configuration) reading 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -11,7 +11,7 @@ The project uses **PostgreSQL** for the database and is containerized using **Do
 
 #### 📝 **docker build & run**
         docker build -t cleanarchitecture-app:latest .
-        docker run -p 8080:8080 --name cleanarchitecture-container cleanarchitecture-app:latest
+        docker run -p 8080:8080 -e ASPNETCORE_ENVIRONMENT=Development --name cleanarchitecture-container cleanarchitecture-app:latest
 
 ## 🏗️ **Key Features**
 - **Clean Architecture**: Ensures separation of concerns and scalability.

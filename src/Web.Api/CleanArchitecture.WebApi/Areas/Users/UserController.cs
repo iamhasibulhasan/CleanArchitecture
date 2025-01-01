@@ -5,19 +5,12 @@ using CleanArchitecture.Application.Features.Users.Command.Dtos;
 using CleanArchitecture.Application.Features.Users.Command.Update;
 using CleanArchitecture.Application.Features.Users.Queries.GetAll;
 using CleanArchitecture.Application.Features.Users.Queries.GetById;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.WebApi.Areas.Users;
 
 public class UserController : BaseApiController
 {
-
-    private readonly IMediator _mediator;
-    public UserController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
 
     #region Command
 
@@ -32,7 +25,7 @@ public class UserController : BaseApiController
             return StatusCode(result.StatusCode, result);
         }
         var command = new CreateUserCommand(model);
-        var _result = await _mediator.Send(command, cancellationToken);
+        var _result = await Mediator.Send(command, cancellationToken);
 
         return StatusCode(_result.StatusCode, _result);
     }
@@ -48,7 +41,7 @@ public class UserController : BaseApiController
             return StatusCode(result.StatusCode, result);
         }
         var command = new UpdateUserCommand(model);
-        var _result = await _mediator.Send(command, cancellationToken);
+        var _result = await Mediator.Send(command, cancellationToken);
 
         return StatusCode(_result.StatusCode, _result);
     }
@@ -65,7 +58,7 @@ public class UserController : BaseApiController
         else
         {
             var command = new DeleteUserCommand(id);
-            result = await _mediator.Send(command, cancellationToken);
+            result = await Mediator.Send(command, cancellationToken);
         }
 
         return StatusCode(result.StatusCode, result);
@@ -80,7 +73,7 @@ public class UserController : BaseApiController
     {
         Result result;
         var command = new GetAllUserQuery();
-        result = await _mediator.Send(command, cancellationToken);
+        result = await Mediator.Send(command, cancellationToken);
         if (result.Data is null)
         {
             return StatusCode(result.StatusCode, result);
@@ -93,7 +86,7 @@ public class UserController : BaseApiController
     {
         Result result;
         var command = new GetByIdUserQuery(id);
-        result = await _mediator.Send(command, cancellationToken);
+        result = await Mediator.Send(command, cancellationToken);
         if (result.Data is null)
         {
             return StatusCode(result.StatusCode, result);

@@ -1,0 +1,6 @@
+services:
+  cleanarchitecture.webapi:
+    image: ${DOCKER_REGISTRY-}cleanarchitecturewebapi
+    build:
+      context: .
+      dockerfile: src/Web.Api/CleanArchitecture.WebApi/Dockerfile
